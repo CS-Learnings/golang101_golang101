@@ -2,7 +2,7 @@
 
 __函数声明和调用__已经在前面的文章中解释过了。当前这篇文章将介绍更多关于函数的概念和细节。
 
-	// __ 函数声明和调用 :: function-declarations-and-calls.html
+	=== 函数声明和调用 :: function-declarations-and-calls.html
 
 事实上，在Go中，函数是一种一等公民类型。换句话说，我们可以把函数当作值来使用。
 尽管Go是一门静态语言，但是Go函数的灵活性宛如甚至超越了很多动态语言。
@@ -10,8 +10,8 @@ __函数声明和调用__已经在前面的文章中解释过了。当前这篇�
 Go中有一些内置函数，这些函数展示在__`builtin`__和__`unsafe`__标准包中。
 内置函数和自定义函数有很多差别。这些差别将在下面逐一提及。
 
-	// __ builtin :: https://docs.go101.org/std/pkg/builtin.html
-	// __ unsafe :: https://docs.go101.org/std/pkg/unsafe.html
+	=== builtin :: https://docs.go101.org/std/pkg/builtin.html
+	=== unsafe :: https://docs.go101.org/std/pkg/unsafe.html
 
 ###++++++ 函数签名（function signature）和函数类型
 
@@ -96,7 +96,7 @@ func (sep string, tokens ...string) string
 __Go类型系统概述__一文已经提到了函数类型属于不可比较类型。
 但是，和映射值以及切片值类似，一个函数值可以和类型不确定的`nil`比较。（函数值将在本文最后一节介绍。）
 
-	// __ Go类型系统概述 :: type-system-overview.html#types-not-support-comparison
+	=== Go类型系统概述 :: type-system-overview.html#types-not-support-comparison
 
 因为函数类型属于不可比较类型，所以函数类型不可用做映射类型的键值类型。
 
@@ -168,7 +168,7 @@ func Println(a ...interface{}) (n int, err error)
 这三个函数中的变长参数的类型均为`[]interface{}`。此类型的元素类型为`interface{}`，这是一个接口类型。
 接口类型和接口值将在后面的__接口__一文中详述。
 
-	// __ 接口 :: interface.html
+	=== 接口 :: interface.html
 
 @@@ #variadic-call
 ###------ 变长参数函数调用
@@ -261,7 +261,7 @@ func main() {
 *.	同一个包内可以声明若干个原型为`func ()`的__名称为`init`的函数__。
 *.	多个函数的名称可以被声明为空标识符`_`。这样声明的函数不可被调用。
 
-	// __ 名称为`init`的函数 :: packages-and-imports.html#init
+	=== 名称为`init`的函数 :: packages-and-imports.html#init
 
 @@@ #compile-time-evaluated-calls
 ###------ 某些函数调用是在编译时刻被估值的
@@ -271,13 +271,13 @@ func main() {
 另外，某些其它内置函数（比如`len`和`cap`等）的调用在所传实参满足一定的条件的时候也将在编译时刻估值。
 详见__在编译时刻估值的函数调用__。
 
-	// __ 在编译时刻估值的函数调用 :: summaries.html#compile-time-evaluation
+	=== 在编译时刻估值的函数调用 :: summaries.html#compile-time-evaluation
 
 ###------ 所有的函数调用的传参均属于值复制
 
 再重申一次，和赋值一样，传参也属于值（浅）复制。当一个值被复制时，只有它的__直接部分__被复制了。
 
-	// __ 直接部分 :: value-part.html#about-value-copy
+	=== 直接部分 :: value-part.html#about-value-copy
 
 ###------ 不含函数体的函数声明
 
@@ -286,7 +286,7 @@ Go汇编代码放在后缀为`.a`的文件中。
 一个使用Go汇编实现的函数依旧必须在一个`*.go`文件中声明，但是它的声明必须不能含有函数体。
 换句话说，一个使用Go汇编实现的函数的声明中只含有它的原型。
 
-	// __ Go汇编（Go assembly） :: https://golang.google.cn/doc/asm
+	=== Go汇编（Go assembly） :: https://golang.google.cn/doc/asm
 
 ###------ 某些有返回值的函数可以不必返回
 
@@ -305,7 +305,7 @@ func fb() bool {
 }
 '''
 
-	// __ 终止语句 :: https://golang.google.cn/ref/spec#Terminating_statements
+	=== 终止语句 :: https://golang.google.cn/ref/spec#Terminating_statements
 
 ###------ 自定义函数的调用返回结果可以被舍弃，但是某些内置函数的调用返回结果不可被舍弃
 
@@ -358,7 +358,7 @@ func main() {
 
 注意，在目前的标准编译器的实现中，__有几个内置函数破坏了上述规则的普遍性__。
 
-	// __ 有几个内置函数破坏了上述规则的普遍性 :: exceptions.html#nest-function-calls
+	=== 有几个内置函数破坏了上述规则的普遍性 :: exceptions.html#nest-function-calls
 
 ###++++++ 函数值
 
@@ -377,7 +377,7 @@ func main() {
 从__值部__一文，我们得知，当一个函数值被赋给另一个函数值后，这两个函数值将共享底层部分（内部的函数结构）。
 换句话说，这两个函数值表示的函数可以看作是同一个函数。调用它们的效果是相同的。
 
-	// __ 值部 :: value-part.html
+	=== 值部 :: value-part.html
 
 一个例子：
 @@@ .line-numbers
@@ -468,8 +468,7 @@ func(yield func(K, V) bool)
 当使用一个`for-range`循环遍历这样的一个遍历器函数值时，
 这个遍历器函数值将被调用（一次）并被传入一个隐式创建的`yield`回调函数。
 此`yield`回调函数返回一个`bool`结果。
-当它返回`false`时，这个遍历器函数的调用应该（但并不强求一定）立即退出；
-否则（当此`yield`回调函数返回`true`时），这个遍历器函数应该继续执行，直到自然退出。
+当它返回`false`时，这个遍历器函数的调用不应再次调用 `yield` 函数。
 
 下面是一些使用遍历器函数的例子：
 
@@ -557,8 +556,8 @@ func main() {
 
 请阅读__这篇官方博客文章__和__这篇文章__了解更多关于遍历器的内容。
 
-	// __这篇官方博客文章:: https://go.dev/blog/range-functions
-	// __这篇文章:: https://go101.org/blog/2025-03-15-some-facts-about-iterators.html
+	===这篇官方博客文章:: https://go.dev/blog/range-functions
+	===这篇文章:: https://go101.org/blog/2025-03-15-some-facts-about-iterators.html
 
 
 

@@ -7,9 +7,6 @@
 <a href="function-declarations-and-calls.html">函数声明和调用</a>已经在前面的文章中解释过了。当前这篇文章将介绍更多关于函数的概念和细节。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <div class="tmd-usual">
 事实上，在Go中，函数是一种一等公民类型。换句话说，我们可以把函数当作值来使用。尽管Go是一门静态语言，但是Go函数的灵活性宛如甚至超越了很多动态语言。
@@ -19,9 +16,6 @@
 Go中有一些内置函数，这些函数展示在<a href="https://docs.go101.org/std/pkg/builtin.html"><code class="tmd-code-span">builtin</code></a>和<a href="https://docs.go101.org/std/pkg/unsafe.html"><code class="tmd-code-span">unsafe</code></a>标准包中。内置函数和自定义函数有很多差别。这些差别将在下面逐一提及。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <h3 class="tmd-header-3">
 函数签名（function signature）和函数类型
@@ -119,9 +113,6 @@ func (sep string, tokens ...string) string
 <a href="type-system-overview.html#types-not-support-comparison">Go类型系统概述</a>一文已经提到了函数类型属于不可比较类型。但是，和映射值以及切片值类似，一个函数值可以和类型不确定的<code class="tmd-code-span">nil</code>比较。（函数值将在本文最后一节介绍。）
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <div class="tmd-usual">
 因为函数类型属于不可比较类型，所以函数类型不可用做映射类型的键值类型。
@@ -205,9 +196,6 @@ func Println(a ...interface{}) (n int, err error)
 这三个函数中的变长参数的类型均为<code class="tmd-code-span">[]interface{}</code>。此类型的元素类型为<code class="tmd-code-span">interface{}</code>，这是一个接口类型。接口类型和接口值将在后面的<a href="interface.html">接口</a>一文中详述。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <h4 id="variadic-call" class="tmd-header-4">
 变长参数函数调用
@@ -330,9 +318,6 @@ func main() {
 </li>
 </ol>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <h4 id="compile-time-evaluated-calls" class="tmd-header-4">
 某些函数调用是在编译时刻被估值的
@@ -342,9 +327,6 @@ func main() {
 大多数函数调用都是在运行时刻被估值的。但<code class="tmd-code-span">unsafe</code>标准库包中的函数的调用都是在编译时刻估值的。另外，某些其它内置函数（比如<code class="tmd-code-span">len</code>和<code class="tmd-code-span">cap</code>等）的调用在所传实参满足一定的条件的时候也将在编译时刻估值。详见<a href="summaries.html#compile-time-evaluation">在编译时刻估值的函数调用</a>。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <h4 class="tmd-header-4">
 所有的函数调用的传参均属于值复制
@@ -354,9 +336,6 @@ func main() {
 再重申一次，和赋值一样，传参也属于值（浅）复制。当一个值被复制时，只有它的<a href="value-part.html#about-value-copy">直接部分</a>被复制了。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <h4 class="tmd-header-4">
 不含函数体的函数声明
@@ -366,9 +345,6 @@ func main() {
 我们可以使用<a href="https://golang.google.cn/doc/asm">Go汇编（Go assembly）</a>来实现一个Go函数。Go汇编代码放在后缀为<code class="tmd-code-span">.a</code>的文件中。一个使用Go汇编实现的函数依旧必须在一个<code class="tmd-code-span">*.go</code>文件中声明，但是它的声明必须不能含有函数体。换句话说，一个使用Go汇编实现的函数的声明中只含有它的原型。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <h4 class="tmd-header-4">
 某些有返回值的函数可以不必返回
@@ -388,9 +364,6 @@ func fb() bool {
 }
 </code></pre>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <h4 class="tmd-header-4">
 自定义函数的调用返回结果可以被舍弃，但是某些内置函数的调用返回结果不可被舍弃
@@ -461,9 +434,6 @@ func main() {
 注意，在目前的标准编译器的实现中，<a href="exceptions.html#nest-function-calls">有几个内置函数破坏了上述规则的普遍性</a>。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <h3 class="tmd-header-3">
 函数值
@@ -489,9 +459,6 @@ func main() {
 从<a href="value-part.html">值部</a>一文，我们得知，当一个函数值被赋给另一个函数值后，这两个函数值将共享底层部分（内部的函数结构）。换句话说，这两个函数值表示的函数可以看作是同一个函数。调用它们的效果是相同的。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 <div class="tmd-usual">
 一个例子：
@@ -587,7 +554,7 @@ func(yield func(K, V) bool)
 </div>
 <p></p>
 <div class="tmd-usual">
-当使用一个<code class="tmd-code-span">for-range</code>循环遍历这样的一个遍历器函数值时，这个遍历器函数值将被调用（一次）并被传入一个隐式创建的<code class="tmd-code-span">yield</code>回调函数。此<code class="tmd-code-span">yield</code>回调函数返回一个<code class="tmd-code-span">bool</code>结果。当它返回<code class="tmd-code-span">false</code>时，这个遍历器函数的调用应该（但并不强求一定）立即退出；否则（当此<code class="tmd-code-span">yield</code>回调函数返回<code class="tmd-code-span">true</code>时），这个遍历器函数应该继续执行，直到自然退出。
+当使用一个<code class="tmd-code-span">for-range</code>循环遍历这样的一个遍历器函数值时，这个遍历器函数值将被调用（一次）并被传入一个隐式创建的<code class="tmd-code-span">yield</code>回调函数。此<code class="tmd-code-span">yield</code>回调函数返回一个<code class="tmd-code-span">bool</code>结果。当它返回<code class="tmd-code-span">false</code>时，这个遍历器函数的调用不应再次调用 <code class="tmd-code-span">yield</code> 函数。
 </div>
 <p></p>
 <div class="tmd-usual">
@@ -682,8 +649,5 @@ func main() {
 请阅读<a href="https://go.dev/blog/range-functions">这篇官方博客文章</a>和<a href="https://go101.org/blog/2025-03-15-some-facts-about-iterators.html">这篇文章</a>了解更多关于遍历器的内容。
 </div>
 <p></p>
-<div class="tmd-usual">
-
-</div>
 <p></p>
 </div>
