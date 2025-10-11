@@ -561,10 +561,10 @@ func main() {
 简单说来，
 <ul>
 <li>
-	类型<code>struct{T}</code>和<code>*struct{T}</code>均将获取类型<code>T</code>的所有方法。
+	类型<code>struct{Embedded}</code>和<code>*struct{Embedded}</code>（如果它们是符合语法的）均将获取类型<code>Embedded</code>的所有方法。
 </li>
 <li>
-	类型<code>*struct{T}</code>、<code>struct{*T}</code>和<code>*struct{*T}</code>都将获取类型<code>*T</code>的所有方法。
+	类型<code>*struct{Embedded}</code>、<code>struct{*Embedded}</code>和<code>*struct{*Embedded}</code>（如果它们是符合语法的）都将获取类型<code>*Embedded</code>的所有方法。
 </li>
 </ul>
 
@@ -574,7 +574,7 @@ func main() {
 // 解释目的。它们有助于解释提升方法值是如何被估值的。
 func (s Singer) PrintName = s.Person.PrintName
 func (s *Singer) PrintName = s.Person.PrintName
-func (s *Singer) SetAge = s.Person.SetAge
+func (s *Singer) SetAge = (&amp;(*s).Person).SetAge
 </code></pre>
 
 <p>
